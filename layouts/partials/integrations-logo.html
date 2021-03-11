@@ -36,6 +36,16 @@
   {{- end -}}
 {{- end -}}
 
+<!--{{/* Lets try convert _ to - as we may have passed name not id */}}-->
+{{- if not $imageExists -}}
+  {{- range $manifestBasename := $integrationLogosList -}}
+    {{- if eq (replace $basename "_" "-") $manifestBasename -}}
+      {{- $imageExists = true -}}
+      {{- $basename = (replace $basename "_" "-") }}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 <!--{{/* Build the image path and return it or return empty string */}}-->
 {{- if $imageExists -}}
     {{- $output_image = (printf "%s%s_%s%s" $img_url $basename $variant $extension) | safeURL -}}
