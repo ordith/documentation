@@ -2397,12 +2397,9 @@ components:
       - GROUP
     HTTPLog:
       description: Structured log message.
-      oneOf:
-      - $ref: '#/components/schemas/HTTPLogItem'
-      - description: List of log items.
-        items:
-          $ref: '#/components/schemas/HTTPLogItem'
-        type: array
+      items:
+        $ref: '#/components/schemas/HTTPLogItem'
+      type: array
     HTTPLogError:
       description: Invalid query performed.
       properties:
@@ -12682,7 +12679,7 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
       security:
-      - apiKeyAuthQuery: []
+      - apiKeyAuth: []
       summary: Submit a Service Check
       tags:
       - Service Checks
@@ -13831,7 +13828,7 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Bad Request
       security:
-      - apiKeyAuthQuery: []
+      - apiKeyAuth: []
       summary: Post an event
       tags:
       - Events
@@ -18201,7 +18198,7 @@ paths:
                 $ref: '#/components/schemas/APIErrorResponse'
           description: Payload too large
       security:
-      - apiKeyAuthQuery: []
+      - apiKeyAuth: []
       summary: Submit metrics
       tags:
       - Metrics
@@ -21669,7 +21666,7 @@ paths:
               schema:
                 type: object
           description: Response from server (always 200 empty JSON).
-        default:
+        '400':
           content:
             application/json:
               schema:
